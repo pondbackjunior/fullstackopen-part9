@@ -36,9 +36,11 @@ router.post("/:id/entries", (req, res) => {
     const addedEntry = patientsService.addEntry(patient.id, newEntry)
     return res.json(addedEntry)
   } catch (error: unknown) {
+    // eslint-disable-next-line no-useless-assignment
     let errorMessage = ""
     if (error instanceof Error) {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const parsed = JSON.parse(error.message)
         if (Array.isArray(parsed)) {
           errorMessage = parsed.map((err: { message: string }) => err.message).join(", ")
